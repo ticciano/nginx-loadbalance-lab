@@ -1,0 +1,20 @@
+services:
+  webserver01:
+      restart: on-failure
+      build: ./webserver01
+      hostname: webserver01
+      ports:
+        - '81:80'
+  webserver02:
+      restart: on-failure
+      build: ./webserver02
+      hostname: webserver02
+      ports:
+        - '82:80'
+  nginx:
+      build: ./nginx
+      ports:
+      - '80:80'
+      depends_on:
+      - webserver01
+      - webserver02
